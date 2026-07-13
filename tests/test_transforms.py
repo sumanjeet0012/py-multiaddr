@@ -234,3 +234,13 @@ def test_codec_to_string_value_error(proto, buf):
 )
 def test_cid_autoconvert_to_string(proto, buf, expected):
     assert codec_by_name("cid").to_string(proto, buf) == expected
+
+
+def test_string_iter_unix_path():
+    from multiaddr.transforms import string_iter
+
+    parts = list(string_iter("/unix/var/run/docker.sock"))
+    assert len(parts) == 1
+    proto, _, value = parts[0]
+    assert proto.name == "unix"
+    assert value == "var/run/docker.sock"
