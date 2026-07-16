@@ -40,6 +40,25 @@ Requirements
 Usage
 =====
 
+IP Classification
+-----------------
+
+You can easily classify the IP components of multiaddrs (e.g. check for loopback, private networks, or NAT64):
+
+.. code-block:: python
+
+    from multiaddr import Multiaddr, is_private_addr, is_ip_loopback
+
+    ma1 = Multiaddr("/ip4/192.168.1.1/tcp/80")
+    print(is_private_addr(ma1))  # True
+    print(is_ip_loopback(ma1))   # False
+
+    ma2 = Multiaddr("/ip4/127.0.0.1")
+    print(is_private_addr(ma2))  # True
+    print(is_ip_loopback(ma2))   # True
+
+Other available helpers include `is_public_addr`, `is_ip_unspecified`, `is_ip6_link_local`, `is_thin_waist`, and `is_nat64_ipv4_converted_ipv6_addr`.
+
 Simple
 ------
 
